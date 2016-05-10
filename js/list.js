@@ -20,6 +20,7 @@ $(function()
       + '<a href="detail.php?id=' + arrValue["id"] + '">'
       + '<img id="list" src="./img/' + arrValue["img"] + '" width="200" height="200" />'
       + '</a>'
+      + '<p>' + arrValue["name"] + '</p>'
       + '</li>'
     );
   }
@@ -45,7 +46,6 @@ $(function()
   //--------ソートや検索が実行されたときのメソッド-----------------------------------------------------------
   var changeList = function(target){
     arrHtml = [];
-    console.log($(target).text());
     listControl($(target).val());
     $("#jsList").html(arrHtml);
   }
@@ -53,15 +53,22 @@ $(function()
 
   //--------パブリックメソッド-----------------------------------------------------------
 
+  //デフォルト（全表示）のhtmlを出力する
   listControl("all");
-  //デフォルト（全表示）のhtmlを出力するための関数をコール
   $("#jsList").html(arrHtml);
 
-  $('select').change(function() {
+  //selectの値を変更したときにメソッド発動
+  $('[name=category]').change(function() {
     changeList('[name=category]');
   });
-  //$('[name=category]').change(changeList('[name=category]'));
-  //$('[name=category]').change(listControl($('[name=category]').val()));
+
+  $('[type=button]').click(function(){
+    if ($('[type=text]').val()) {
+      changeList('[type=text]');
+    }
+  });
+
+  //
 
   //----------sort機能---------------------------------------------------------------------
 

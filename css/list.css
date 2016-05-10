@@ -82,7 +82,7 @@ h1{
   font-family: FontAwesome;
 }
 
-#search input[type="submit"]{
+#search input[type="button"]{
   font-size: 14px;
   padding: 4px;
   width: 100px;
