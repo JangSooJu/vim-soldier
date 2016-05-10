@@ -1,0 +1,23 @@
+[ログイン画面]
+login.html
+↓
+[ユーザー名・パスワードの照合など]
+login1-2.php（dbx.phpとBasaModel.phpを呼び出す）
+login3.php
+
+[ユーザー名・パスワードのリスト表示]
+pdo3.php
+
+[商品の編集・追加を行うページ]
+admin_edit.php
+admin_add.php
+
+
+
+◎20160510現在
+・PDOを用いてログインをすることが可能となった。
+・pdo3はPDO非対応のまま一旦放置
+・dbとして使用しているadmin_dbにはmemberというテーブルがあり、中身は
+userName(TEXT NOT NULL)
+userPass(TEXT NOT NULL)
+・一旦はadmin_edit.phpとadmin_add.phpページのフォームで送信した内容にPDOを使ってDBに追加、更新することが目標。
