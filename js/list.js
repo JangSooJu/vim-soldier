@@ -10,7 +10,7 @@ $(function()
                     .append('<option value="add"> add </option>');
 
     $('div#search').append('<input id="searchwd" type="text" size="20"/>')
-                   .append('<img id="homes" src="homeskunn.jpg" />');
+                   .append('<img id="homes" src="./img/homeskunn.jpg" />');
     
     //var cart = window.sessionStorage.getItem(['cart']);
     //cartを便利にする
@@ -258,6 +258,8 @@ $(function()
 //------カートに追加・削除----------------------------------------------------------------------------------
     $('button').on("click", function()
         {
+            
+            console.log("a");
             if($(this).attr("class") === "add")
             {
                 addButton((this));
@@ -272,7 +274,6 @@ $(function()
         var flg    = $(that).attr('id'); 
         if(cart_arr == null)
         {
-            console.log("a");
             cart_arr = $.cookie('cart');
         }
         else if(cart_arr.indexOf(flg) !=-1)
@@ -286,9 +287,10 @@ $(function()
         }
         else
         {
+            console.log("a");
             cart_arr.push(flg);    
             $(that).attr("class", "del"); 
-            $(that).attr("value", "削除");
+            $(that).text("削除");
         }
         $.cookie('cart', cart_arr);
     };
@@ -304,29 +306,30 @@ $(function()
         }
         else
         {
+            console.log("d");
             cart_arr.some(function(v, i)
             {
                 if (v==flg) cart_arr.splice(i,1);    
             });
             $(that).attr("class", "add"); 
-            $(that).attr("value", "追加");
+            $(that).text("追加");
         }
         $.cookie('cart', cart_arr);
     };
                 
     function listMakeAdd(arrctg, arr, name )
     {
-        arrctg.push('<a href="detail.php"><img id="list"  src="' + 
-        arr + '" width="200" height="200" /></a><br/> <button type="button" id="' + name + 
-        '" class="del">追加</button><br/> ');
-    }
+        arrctg.push('<a href="detail.php"><img id="list"  src="./img/' + 
+        arr + '" width="200" height="200" /></a><br/> <button type="button" id="' + 
+        name + '" class="add">追加</button><br/> ');
+    };
 
     function listMakeDel(arrctg, arr, name )
     {
-        arrctg.push('<a href="detail.php"><img id="list"  src="' + 
-        arr + '" width="200" height="200"></a><br/> <button id="' + name + 
-        '" class="del" type="button" >削除</button><br/> ');
-    }
+        arrctg.push('<a href="detail.php"><img id="list"  src="./img/' + 
+        arr + '" width="200" height="200"></a><br/> <button id="' + 
+        name + '" class="del" type="button" >削除</button><br/> ');
+    };
 });
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[$()ここまで]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 

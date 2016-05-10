@@ -2,11 +2,11 @@
 
 //////default settings/////////////////
 require_once("config.php");
-require_once("dbClass.php");
-require_once("sessionClass.php");
-require_once("cartClass.php");
-require_once("listControlClass.php");
-require_once("jsClass.php");
+require_once("./class/dbClass.php");
+require_once("./class/sessionClass.php");
+require_once("./class/cartClass.php");
+require_once("./class/listControlClass.php");
+require_once("./class/jsClass.php");
 //////////////////////////////////////
 
 ///////////call classes///////////////////////////////////
@@ -16,12 +16,12 @@ $cart->checkSession();
 //////////////////////////////////////////////////////////
 
 require_once("ifGET.php");
-require_once("sort_search2.php");
+require_once("sort_search.php");
 require_once("escape.php");
 
 $db->close();
 $cnt = count($_SESSION["cart"]);
 
-include_once('list2.2.html');
+include_once('list.html');
 
 ?>
