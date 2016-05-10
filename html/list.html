@@ -1,28 +1,80 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
-<link rel="stylesheet" type="text/css" href="./css/event.css">
-<script> var array = <?php echo json_safe_encode($data); ?></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="./js/jquery.cookie.js"></script>
-<script src="./js/list.js"></script>
-<meta charset="utf-8">
-<title>AKI農場</title>
+  <link rel="stylesheet" href="css/list.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <meta charset="UTF-8">
+  <title>商品一覧 / あき農場</title>
+  <link rel="stylesheet" type="text/css" href="./css/event.css">
+  <?php
+    $data = Array (
+     '0' => Array ( 'id' => "4" , 'name' => "" , 'price' => "940" , 'detail' => "great" , 'img' => "takowasa.jpg" , 'category' => "syusai" , 'kana' => "takowasa" ),
+     '1' => Array ( 'id' => "5" , 'name' => "" , 'price' => "590" , 'detail' => "good" , 'img' => "tyannjya.jpg" , 'category' => "zennsai" , 'kana' => "tyannjya" ),
+     '2' => Array ( 'id' => "6" , 'name' => "" , 'price' => "790" , 'detail' => "great" , 'img' => "tyahan.jpg" , 'category' => "syusyoku" , 'kana' => "tyahan" ),
+     '3' => Array ( 'id' => "7" , 'name' => "" , 'price' => "530" , 'detail' => "great" , 'img' => "edamame.jpg" , 'category' => "zennsai" , 'kana' => "edamame" ),
+     '4' => Array ( 'id' => "8" , 'name' => "" , 'price' => "300" , 'detail' => "great" , 'img' => "yakitori.jpg" , 'category' => "syusai" , 'kana' => "yakitori" ),
+     '5' => Array ( 'id' => "9" , 'name' => "" , 'price' => "690" , 'detail' => "great" , 'img' => "nasigorenn.jpg" , 'category' => "syusyoku" , 'kana' => "nasigorenn" ),
+     '6' => Array ( 'id' => "10" , 'name' => "" , 'price' => "800" , 'detail' => "great" , 'img' => "pasuta.jpg" , 'category' => "syusyoku" , 'kana' => "pasuta" ),
+     '7' => Array ( 'id' => "11" , 'name' => "" , 'price' => "700" , 'detail' => "great" , 'img' => "sunagimo.jpg" , 'category' => "syusai" , 'kana' => "sunagimonokaraage" ),
+     '8' => Array ( 'id' => "12" , 'name' => "" , 'price' => "790" , 'detail' => "great" , 'img' => "poteto.jpg" , 'category' => "syusai" , 'kana' => "potetohurai" ),
+     '9'=> Array ( 'id' => "13" , 'name' => "" , 'price' => "790" , 'detail' => "great" , 'img' => "siokonnbu.jpg" , 'category' => "zennsai" , 'kana' => "siokonbukyabetu" )
+    );
+  ?>
+  <script> var array = <?php echo json_safe_encode($data); ?></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="./js/jquery.cookie.js"></script>
+  <script src="./js/list.js"></script>
 </head>
-
 <body>
-<!--///////pulldown-sort-form(js)///////////////////-->
-sort(javascript)
-<div id="select" ></div>
-<!--////////////////////////////////////////////-->
+  <header>
+    <h1><img src="img/logo_tsukada.jpg" alt=""></h1>
+    <ul class="navMenu clearfix">
+      <li>
+        <!-- <img src="" alt=""> -->
+        <img src="img/logo_header.png" alt="">
+      </li>
+      <li>
+        <label class="selecter">
+          <select name="category">
+            <option value="" selected>すべて</option>
+            <option value="zennsai">前菜</option>
+            <option value="syusai">主菜</option>
+            <option value="fukusai">副菜</option>
+            <option value="syusyoku">主食</option>
+          </select>
+        </label>
+      </li>
+      <li>
+        <form id="search" action="" method="get">
+          <input type="text" placeholder="&#xF002;　料理名・食材名" name="keyword">
+          <input type="submit" value="メニュー検索">
+        </form>
+        <ul class="textList">
+          <li><a href="">たこわさ</a></li>
+          <li><a href="">チャンジャ</a></li>
+          <li><a href="">えだまめ</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="liWrapper">
+          <p><a href=""><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></p>
+          <p><a href="">カート</a></p>
+          <a href=""><div class="label">2</div></a>
+        </div>
+      </li>
+    </ul>
+  </header>
+  <div class="clearfix"></div>
 
-<!--///////wordsearch-form(js)///////////////////-->
-search(javascript)
-<div id="search" ></div>
-<!--////////////////////////////////////////////-->
+  <div class="wrapper">
+    <div class="list clearfix">
+      <ul id="jsList">
+        <?//スクリプトで出力?>
+      </ul>
+    </div>
+  </div>
+  <footer>
 
-
-<div id="box"></div>
-
+  </footer>
 </body>
 </html>
