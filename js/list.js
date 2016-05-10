@@ -1,51 +1,75 @@
-//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[$()ここから]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 $(function()
 {
-  //初期設定
-  // arrctgにはhtmlの文字列が格納されていく。
-  var arrctg = new Array();
-  //cookie.jsというライブラリを使用。初期設定
+  //--------オブジェクト宣言---------------------------------------------------------
+  // htmlを出力するために使う配列の宣言
+  var arrHtml = new Array();
+  var arrValue = new Array();
+
+  //cookie.jsというライブラリを使用し、そのための初期設定
   $.cookie.json = true;
   var cart_arr = $.cookie('cart');
   if( !cart_arr ){
     cart_arr = Array();
   };
-  //sortに使う宣言
-  var arr_category = new Array();
-  var arrctg_s = new Array();
 
-  //--------リストを出力するためのメソッド----------------------------------------------------------
-  var makeHtmlList = function(image,id){
-    arrctg.push(
+
+  //--------リストをhtml出力するためのメソッド----------------------------------------------------------
+  var makeHtmlList = function(arrValue){
+    arrHtml.push(
       '<li>'
-      + '<a href="detail.php?id=' + id + '">'
-      + '<img id="list" src="./img/' + image + '" width="200" height="200" />'
+      + '<a href="detail.php?id=' + arrValue["id"] + '">'
+      + '<img id="list" src="./img/' + arrValue["img"] + '" width="200" height="200" />'
+      + '</a>'
       + '</li>'
     );
   }
 
-  var listMakeControl = function(key,val){
-    //makeHtmlListにIDの番号を渡すために変数を定義し、値を格納する。
-    var id;
-    if(key==='id'){
-      id=val;
-    }
-    //おおもとのデータの配列キーがimgだった時にその値を渡す。↑のvalとは別の値だよ。
-    if(key==='img'){
-      makeHtmlList(val,id);
+
+  //--------配列の要素の数だけループし、html出力につなげるメソッド----------------------------------------------------------
+  var listControl = function(target){
+    for(var i=0 ; i < array.length ; i++){
+      //makeHtmlListに配列を渡すために格納する処理。
+      for(var cate in array[i]){
+        arrValue[cate]=array[i][cate];
+      }
+      //allのときにはっ全部表示。検索ワードやカテゴリーソートの時は絞って表示
+      if(target==="all"){
+        makeHtmlList(arrValue);
+      }else if (target == arrValue["category"] || target == arrValue["kana"]) {
+        makeHtmlList(arrValue);
+      }
     }
   }
 
 
+  //--------ソートや検索が実行されたときのメソッド-----------------------------------------------------------
+  var changeList = function(target){
+    arrHtml = [];
+    console.log($(target).text());
+    listControl($(target).val());
+    $("#jsList").html(arrHtml);
+  }
 
-//--------ページに最初に訪れたときにリストをすべて表示する-----------------------------------------------------------
-    for(var i=0 ; i < array.length ; i++){
-		  for(var dataCate in array[i]){
-        listMakeControl(dataCate,array[i][dataCate]);
-      }
-    };
-    //
-    $("#jsList").html(arrctg);
+
+  //--------パブリックメソッド-----------------------------------------------------------
+
+  listControl("all");
+  //デフォルト（全表示）のhtmlを出力するための関数をコール
+  $("#jsList").html(arrHtml);
+
+  $('select').change(function() {
+    changeList('[name=category]');
+  });
+  //$('[name=category]').change(changeList('[name=category]'));
+  //$('[name=category]').change(listControl($('[name=category]').val()));
+
+  //----------sort機能---------------------------------------------------------------------
+
+
+
+
+});
+
 
 //----------sort---------------------------------------------------------------------
     // $("div#select").change(function()
@@ -327,7 +351,7 @@ $(function()
     //     name + '" class="del" type="button" >削除</button><br/> ');
     // };
 
-});
+
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[$()ここまで]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 //---関数作ってやると()関係でうまく動いてくれなかったので一時的に外してる-----------
