@@ -40,7 +40,8 @@ $(function()
             if(y === "img" && jQuery.inArray(name_d, cart_arr) == -1)//cartに入っていなかったら)
             {
                 listMakeAdd(arrctg, array[i][y], name_d);
-            }else if(y === "img")
+            }
+            else if(y === "img")
             {
                 listMakeDel(arrctg, array[i][y], name_d);
             }
@@ -49,7 +50,7 @@ $(function()
                 arrctg.push(y + " : " + array[i][y] + " <br/> ");
             }
         }
-    }
+    };
     $("div#box").html(arrctg);		    
 
 //----------sort---------------------------------------------------------------------
@@ -146,7 +147,8 @@ $(function()
                     if(e === "img" && jQuery.inArray(name_s, cart_arr) == -1 )
                     {
                         listMakeAdd(arrctg_s, arr_category[i][e], name_s);
-                    }else if(e === "img")
+                    }
+                    else if(e === "img")
                     {
                         listMakeDel(arrctg_s, arr_category[i][e], name_s);
                     }
@@ -155,7 +157,7 @@ $(function()
                         arrctg_s.push(e + " : " + arr_category[i][e] + " <br/> ");
                     } 
                 }
-	        }
+	        };
         $("div#box").html(arrctg_s);	
         }
     });
@@ -188,7 +190,8 @@ $(function()
                 if(z === "img" && jQuery.inArray(name_w, cart_arr) == -1 )
                 {
                     listMakeAdd(arrctg_w, arr_sw[i][z], name_w);
-                }else if(z === "img")
+                }
+                else if(z === "img")
                 {
                     listMakeDel(arrctg_w, arr_sw[i][z], name_w);
                 }
@@ -197,8 +200,8 @@ $(function()
                     arrctg_w.push(z + " : " + arr_sw[i][z] + " <br/> ");
                 }
             }
-        }
-        $("div#box").html(arrctg_w);	
+        };
+    $("div#box").html(arrctg_w);	
     });
 //--------画像が動くやつ-----------------------------------------------------------------------
 /*    var flag = false;
@@ -246,7 +249,7 @@ $(function()
                 $(this).addClass('watermark');
             }
         });
-    
+
         $("form#search").submit(function()
                 {
                     if(('input#searchwd').val === str)
@@ -258,12 +261,12 @@ $(function()
 //------カートに追加・削除----------------------------------------------------------------------------------
     $('button').on("click", function()
         {
-            
             console.log("a");
             if($(this).attr("class") === "add")
             {
                 addButton((this));
-            }else
+            }
+            else
             {
                 delButton((this));
             }
@@ -291,8 +294,8 @@ $(function()
             cart_arr.push(flg);    
             $(that).attr("class", "del"); 
             $(that).text("削除");
-        }
-        $.cookie('cart', cart_arr);
+        };
+    $.cookie('cart', cart_arr);
     };
 
     function delButton(that)
@@ -311,25 +314,26 @@ $(function()
             {
                 if (v==flg) cart_arr.splice(i,1);    
             });
-            $(that).attr("class", "add"); 
-            $(that).text("追加");
-        }
+        $(that).attr("class", "add"); 
+        $(that).text("追加");
+        };
         $.cookie('cart', cart_arr);
     };
-                
+
     function listMakeAdd(arrctg, arr, name )
     {
-        arrctg.push('<a href="detail.php"><img id="list"  src="./img/' + 
+        arrctg.push('<a href="detail.php?name=' + name + '"><img id="list"  src="./img/' + 
         arr + '" width="200" height="200" /></a><br/> <button type="button" id="' + 
         name + '" class="add">追加</button><br/> ');
     };
 
     function listMakeDel(arrctg, arr, name )
     {
-        arrctg.push('<a href="detail.php"><img id="list"  src="./img/' + 
+        arrctg.push('<a href="detail.php?name=' + name + '"><img id="list"  src="./img/' + 
         arr + '" width="200" height="200"></a><br/> <button id="' + 
         name + '" class="del" type="button" >削除</button><br/> ');
     };
+
 });
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[$()ここまで]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 

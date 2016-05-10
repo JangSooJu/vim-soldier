@@ -22,6 +22,6 @@ require_once("escape.php");
 $db->close();
 $cnt = count($_SESSION["cart"]);
 
-include_once('list.html');
+include_once('./html/list.html');
 
 ?>
