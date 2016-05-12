@@ -2,6 +2,8 @@
 $(function()
 {
 //-------もろもろ作成-------------------------------------------------------
+    $('div#res').append('<a id="res" href="reserve.php">Go cart!!</a>');
+
     $('div#select').append('<select id="sort"></select>');
     $('select#sort').append('<option value="all"> all </option>')
                     .append('<option value="zennsai"> zennsai </option>')
@@ -15,6 +17,8 @@ $(function()
     //var cart = window.sessionStorage.getItem(['cart']);
     //cartを便利にする
     
+    
+
     $.cookie.json = true;
     var cart_arr = $.cookie('cart');
     //console.log(cart_arr);
@@ -25,6 +29,84 @@ $(function()
     };
     //console.log(cart_arr);
     //$.removeCookie( "cart" ); 
+    //$("#search_results").slideUp();
+
+    /*
+    //検索ボタンを押しても検索開始する
+    $("img#homes").click(function(e){
+        e.preventDefault();
+        ajax_search();
+    });
+
+    //検索窓に入力した段階でも検索を行ってくれる
+    $("input#searchwd").autocomplete({
+        //e.preventDefault();
+        source: ajax_search()
+    
+    
+    });
+     
+    //ajaxで別ファイルに飛ばす関数
+    function ajax_search(){
+        $("input#searchwd").show();
+        var search_val = $("input#searchwd").val();
+        var arr;
+        console.log("a");
+        $.post("./find.php", {"search_term" : search_val}, function(data){
+            console.log("b");
+            console.log(typeof data);
+            console.log(data);
+            arr = data;
+        });
+        return arr;
+    };*/
+           /* $('input#searchwd').autocomplete({
+                source: [ "fda", "fahta", "fatha",  ]
+                //autoFocus: true,
+                //delay: 500,
+                //minLength: 2
+            });*/
+    
+    $('img#edamame').css({display:'block',marginLeft:$(window).width(),opacity:'0'});
+	$('img#edamame').animate({marginLeft:'0px',opacity:'1'},1000); 
+	$('img#edamame').css({display:'block',opacity:'0'});
+	$('img#edamame').animate({opacity:'1'},1000);
+    
+    $("img#edamame").hover(
+            function(){
+                $(this).fadeTo(100,0.8);
+            },
+            function(){
+                $(this).fadeTo(100,1);
+            }
+        );
+/*
+    $('a').click(function(){
+		var pass = $(this).attr("href");
+		$('#container').animate({marginLeft:'-=' + $(window).width() + 'px',opacity:'0'},1000,function(){
+			location.href = pass;
+			setTimeout(function(){
+				$('#container').css({marginLeft:'0',opacity:'1'})
+			},3000);
+		});
+	    return false;
+	});
+    */
+    /*ここからインクリメント検索
+    var data = [
+        'sample1',
+        'sample2',
+        'sample3',
+        'sample4'
+    ];
+
+    $('#input_form_id_here').autocomplete({
+        source: data,
+        autoFocus: true,
+        delay: 500,
+        minLength: 2
+    });
+    */
 //--------最初にallを表示------------------------------------------------------------
     //----------------------------------- 
     // 初期化作業
@@ -322,16 +404,16 @@ $(function()
 
     function listMakeAdd(arrctg, arr, name )
     {
-        arrctg.push('<a href="detail.php?name=' + name + '"><img id="list"  src="./img/' + 
-        arr + '" width="200" height="200" /></a><br/> <button type="button" id="' + 
-        name + '" class="add">追加</button><br/> ');
+        arrctg.push('<p><a href="detail.php?name=' + name + '"><img id="list"  src="./img/' + 
+        arr + '" width="200" height="200" /></a></p> <p><button type="button" id="' + 
+        name + '" class="add">追加</button></p> ');
     };
 
     function listMakeDel(arrctg, arr, name )
     {
-        arrctg.push('<a href="detail.php?name=' + name + '"><img id="list"  src="./img/' + 
-        arr + '" width="200" height="200"></a><br/> <button id="' + 
-        name + '" class="del" type="button" >削除</button><br/> ');
+        arrctg.push('<p><a href="detail.php?name=' + name + '"><img id="list"  src="./img/' + 
+        arr + '" width="200" height="200"></a></p> <p><button id="' + 
+        name + '" class="del" type="button" >削除</button></p> ');
     };
 
 });

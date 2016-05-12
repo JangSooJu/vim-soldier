@@ -8,26 +8,33 @@ class control extends Database {
 	}
 
 	public function categorySort($get){
-		$query	= 'SELECT * FROM akino where category = "'. $get. '"';
+		$query	= 'SELECT img, name, price, detail, category, id, kana FROM akino where category = "'. $get. '"';
 		$data = $this->select($query);
 		return $data;
 	}
 	
 	public function wordSearch($get){
-		$query	= 'SELECT * FROM akino where kana like "%'. $get. '%"';
+		$query	= 'SELECT img, name, price, detail, category, id, kana FROM akino where kana like "%'. $get. '%"';
 		$data = $this->select($query);
 		return $data;
 	}
 
 	public function allSelect(){
-	    $query = "SELECT * FROM akino";
+	    $query = "SELECT img, name, price, detail, category, id, kana FROM akino";
 	    $data = $this->select($query);
 	    return $data;
 	}
-
-	public function addSelect($arr){
+    
+    public function incrementSearch($word)
+    {
+	    $query = 'SELECT kana FROM akino where kana like "'. $word. '%"';
+	    $data = $this->select($query);
+	    return $data;
+    }
+    
+    public function addSelect($arr){
 		foreach($arr as $val){	
-			$query = 'SELECT * FROM akino where id ="'. $val. '"';
+			$query = 'SELECT img, name, price, detail, category, id, kana FROM akino where id ="'. $val. '"';
 			if(empty($data)){
 				$data = array();
 				array_push($data, $this->selectImg($query));
@@ -39,14 +46,14 @@ class control extends Database {
 	}
 	
 	public function detailOpen($get){
-		$query = 'SELECT * FROM akino where id ="'. $get. '"';
+		$query = 'SELECT img, name, price, detail, category, id, kana FROM akino where kana ="'. $get. '"';
 	    $data = $this->select($query);
 	    return $data;	
 	}
 
 	public function cartShow($arr){
 		foreach($arr as $val){	
-			$query = 'SELECT img FROM akino where id ="'. $val. '"';
+			$query = 'SELECT *  FROM akino where id ="'. $val. '"';
 			if(empty($data)){
 				$data = array();
 				array_push($data, $this->selectImg($query));

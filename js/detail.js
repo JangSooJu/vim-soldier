@@ -1,8 +1,8 @@
-//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[$()‚±‚±‚©‚ç]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[$()ã“ã“ã‹ã‚‰]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 $(function()
 {
-//-------‚à‚ë‚à‚ëì¬-------------------------------------------------------
-    
+//-------ã‚‚ã‚ã‚‚ã‚ä½œæˆ-------------------------------------------------------
+    $('div#res').append('<a id="res" href="reserve.php">Go cart!!</a>');
     $.cookie.json = true;
     var cart_arr = $.cookie('cart');
     if( !cart_arr )
@@ -10,7 +10,37 @@ $(function()
         cart_arr = Array();
     };
 
-//------ƒJ[ƒg‚É’Ç‰ÁEíœ----------------------------------------------------------------------------------
+//--------è©³ç´°ã‚’è¡¨ç¤º------------------------------------------------------------
+    var arrctg = new Array();
+    for(var i=0 ; i < array.length ; i++)
+    {	
+		for(var y in array[i])
+        {
+            //imgã®ã¿ã‚¿ã‚°ã¤ãã§æ›¸ãè¾¼ã‚€
+            //console.log(cart_arr);
+            if( y === "img")
+            {
+                var name_d = array[i][y].substr(0, array[i][y].length-4);
+                listMakeDel(arrctg, array[i][y], name_d);
+            } 
+            /*else if( y === "kana" )
+            {
+                arrctg.push('<p class="' + y + '">' + array[i][y] + ' </p>' 
+                + ' <p><button type="button" id="' + 
+                array[i][y] + '" class="del">å‰Šé™¤</button></p> ');
+            }*/
+            else if( y === "name" || y === "detail" || y === "price" )
+            {
+                arrctg.push("<p class='" + y + "'>" + array[i][y] + " </p> ");
+            }
+        }
+    };
+    
+    $("div#box").html(arrctg);		    
+
+//------ä¹±æ•°ä½œã‚‹ã£ã¦é©å½“ã«å¼•ã£å¼µã£ã¦ãã‚‹--------------------------------------------------------------------
+
+//------ã‚«ãƒ¼ãƒˆã«è¿½åŠ ãƒ»å‰Šé™¤----------------------------------------------------------------------------------
     $('button').on("click", function()
         {
             console.log("a");
@@ -18,34 +48,37 @@ $(function()
             {
                 addButton((this));
             }
-            else
+            else if($(this).attr("class") === "del")
             {
                 delButton((this));
-            }
+            }/*
+            else if($(this).attr("id") === "res")
+            {
+                window.location.href = 'reserve.php'
+            }*/
         });
 
     function addButton(that)
     {
-        var flg    = $(that).attr('id'); 
+        var flg = $(that).attr('id'); 
         if(cart_arr == null)
         {
             cart_arr = $.cookie('cart');
         }
         else if(cart_arr.indexOf(flg) !=-1)
         {
-            alert('Šù‚É“o˜^‚³‚ê‚Ä‚¢‚Ü‚·');
+            alert('æ—¢ã«ç™»éŒ²ã•ã‚Œã¦ã„ã¾ã™');
         }
         else  if(cart_arr.length > 3)
         {
             alert('cart max!!');
-            //cart_arr.splice(0, 1);
         }
         else
         {
             console.log("a");
             cart_arr.push(flg);    
             $(that).attr("class", "del"); 
-            $(that).text("íœ");
+            $(that).text("å‰Šé™¤");
         };
     $.cookie('cart', cart_arr);
     };
@@ -67,24 +100,29 @@ $(function()
                 if (v==flg) cart_arr.splice(i,1);    
             });
         $(that).attr("class", "add"); 
-        $(that).text("’Ç‰Á");
+        $(that).text("è¿½åŠ ");
         };
         $.cookie('cart', cart_arr);
     };
 
     function listMakeAdd(arrctg, arr, name )
     {
-        arrctg.push('<a href="detail.php?name=' + name + '"><img id="list"  src="./img/' + 
-        arr + '" width="200" height="200" /></a><br/> <button type="button" id="' + 
-        name + '" class="add">’Ç‰Á</button><br/> ');
+        arrctg.push('<p><img id="list"  src="./img/' + 
+        arr + '" width="200" height="200" /></a></p> <p><button type="button" id="' + 
+        name + '" class="add">è¿½åŠ </button></p> ');
     };
 
     function listMakeDel(arrctg, arr, name )
     {
-        arrctg.push('<a href="detail.php?name=' + name + '"><img id="list"  src="./img/' + 
-        arr + '" width="200" height="200"></a><br/> <button id="' + 
-        name + '" class="del" type="button" >íœ</button><br/> ');
+        arrctg.push('<p id="img"><img id="list"  src="./img/' + 
+        arr + '" width="200" height="200"></a></p> ');
+    };
+    
+    function btnPos(arrctg, arr, name )
+    {
+        arrctg.push('<p><button type="button" id="' + 
+        name + '" class="add">è¿½åŠ </button></p> ');
     };
 
 });
-//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[$()‚±‚±‚Ü‚Å]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[$()ã“ã“ã¾ã§]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

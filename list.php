@@ -15,12 +15,14 @@ $cart = new cart("cart");
 $cart->checkSession();
 //////////////////////////////////////////////////////////
 
-require_once("ifGET.php");
-require_once("sort_search.php");
-require_once("escape.php");
-
 $db->close();
 $cnt = count($_SESSION["cart"]);
+$ctr = new control(db_host, db_user, db_pass, db_name );
+$data = $ctr->allSelect();
+
+require_once("ifGET.php");
+//require_once("sort_search.php");
+//require_once("escape.php");
 
 include_once('./html/list.html');
 

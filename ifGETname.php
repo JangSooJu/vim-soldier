@@ -1,6 +1,9 @@
 <?php
-///////////sort&search$add(new-version)////////////////////////////
-$ctr = new control(db_host, db_user, db_pass, db_name );
+
+    $name = $_GET["name"];
+    $ctr  = new control(db_host, db_user, db_pass, db_name );
+    $data = $ctr->detailOpen($name);
+
 /*
 if($_GET["sort"] == "add" && $_SESSION["cart"] !== array() ){
 	$data = $ctr->addSelect($_SESSION["cart"]);
@@ -12,8 +15,4 @@ if($_GET["sort"] == "add" && $_SESSION["cart"] !== array() ){
 }elseif($_GET["searchword"] !== "" ){
 	$data = $ctr->wordSearch($_GET["searchword"]);
 }else{ */
-	$data = $ctr->allSelect();
-//}
-///////////////////////////////////////////////////////////////////
 ?>
-

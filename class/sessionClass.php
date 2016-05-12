@@ -21,12 +21,12 @@ class session {
 //訪れていた場合:_session[key]のvalを配列に格納する
 	public function checkSession(){
 		if (empty($_SESSION[$this->sessionKey])){
-			echo "first time!!!!";	
+			//echo "first time!!!!";	
 			$_SESSION[$this->sessionKey] = array();
 			//$val = $_SESSION[$this->sessionKey] ; 
 			//return $val;
 		}else{ 
-			echo "agein thank you!!!!!!!!!";
+			//echo "agein thank you!!!!!!!!!";
 	    	//$val = $_SESSION[$this->sessionKey] ; 
 		    //return $val;
 		}

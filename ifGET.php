@@ -23,4 +23,5 @@ if(empty($_GET["delete"])){
 	$_SESSION["cart"] = $cart->buttonDel($_GET["delete"]);
 }
 ///////////////////////////////////////////////////////
+
 ?>
