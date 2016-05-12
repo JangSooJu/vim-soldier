@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="css/init.css">
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" type="text/css" href="css/list.css">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="./js/jquery-1.9.1.min.js"></script>
   <script type="text/javascript" src="./js/jquery.cookie.js"></script>
   <script src="./js/make-list.js"></script>
   <script src="./js/cart-cookie.js"></script>
@@ -33,7 +33,6 @@
     <h1><img src="img/logo_tsukada.jpg" alt=""></h1>
     <ul class="navMenu clearfix">
       <li>
-        <!-- <img src="" alt=""> -->
         <img src="img/logo_header.png" alt="">
       </li>
       <li>
@@ -61,14 +60,13 @@
       </li>
       <li>
         <div class="cartWrapper">
-          <p><a href=""><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></p>
-          <p><a href="">カート</a></p>
-          <a href=""><div class="label"></div></a>
+          <p class="cartButton"><i class="fa fa-shopping-cart" aria-hidden="true"></i></p>
+          <p class="cartButton">カート</p>
+          <div class="label cartButton"></div>
         </div>
       </li>
     </ul>
   </header>
-  <div class="clearfix"></div>
 
   <div class="wrapper">
     <div id="errMessage"></div>
@@ -77,11 +75,18 @@
         <!--スクリプトで出力-->
       </ul>
     </div>
+    <div id="cartlay">
+      <p>a</p>
+    </div>
+    <div id="wordlay">
+      <p>b</p>
+    </div>
   </div>
   <div id="overlay">
     <p>a</p>
     <p id="close">close</p>
   </div>
+
   <footer>
 
   </footer>

@@ -1,5 +1,12 @@
 var cartCookieFn = $(function()
 {
+  //--------オブジェクト宣言--------------------------------------------------------
+  var cartFlag
+    , idTarget
+    , idCookie;
+  //クッキーを読み込む
+  var cart_arr = $.cookie('cart');
+
   //cookie.jsというライブラリを使用し、そのための初期設定
   $.cookie.json = true;
 
@@ -27,9 +34,9 @@ var cartCookieFn = $(function()
 
   //--------クッキーを更新するかどうかを司る---------------------------------------------------------
   var cookieControl = function(target){
-    var idTarget = target.attr('id');
+    idTarget = target.attr('id');
     //buttonの文字を削除し、idの数字だけ拾ってくる。
-    var idCookie = idTarget.slice(6);
+    idCookie = idTarget.slice(6);
 
     //
     if(target.html()=="削除") {
@@ -57,13 +64,26 @@ var cartCookieFn = $(function()
   }
 
 
-  //--------クッキーを読み込む---------------------------------------------------------
-  var cart_arr = $.cookie('cart');
-  if( !cart_arr ){
-    cart_arr = Array();
-  }else{
-    //addボタンとdelボタンを書き換える処理
-    //changeButton(cart_arr,"削除");
+  //--------カートボタンを押したときにウインドウを出したり閉じたり---------------------------------------------------------
+  var cartWindowChange = function(way){
+    if(way==="in"){
+      $("#cartlay").fadeIn();
+      $('.navMenu>li:last-child').css("background-color","#aaa");
+      cartFlag=1;
+    }else if (way==="out") {
+      $("#cartlay").hide();
+      $('.navMenu>li:last-child').css("background-color","");
+      cartFlag=0;
+    }
+  }
+
+
+  var cartChangeControl = function(){
+    if(cartFlag!==1){
+      cartWindowChange("in");
+    }else {
+      cartWindowChange("out");
+    }
   }
 
 
@@ -76,6 +96,24 @@ var cartCookieFn = $(function()
     $("#overlay").fadeOut();
   });
 
+  //ボックス外をクリックしたときにボックスを閉じる
+  $(document).click(function(event) {
+    if($.contains($(".navMenu>li:last-child")[0], event.target) || $("#cartlay")[0] == event.target){
+      return false;
+    }
+    cartWindowChange("out");
+  });
+
+  $('.cartButton').click(function(){
+    //指定した位置まで自動でスクロール
+    $("html,body").animate({scrollTop:$('.navMenu').offset().top}, {complete: cartChangeControl()});
+  });
+
+  // $(window).scroll(function() {
+  //   cartWindowChange("out");
+  // });
+
+  //最初のアクセスでカートの数字を書き換える
   cartNumChange();
 
 });

@@ -1,9 +1,11 @@
 var makeListFn = $(function()
 {
   //--------オブジェクト宣言---------------------------------------------------------
-  // htmlを出力するために使う配列の宣言
   var arrHtml = new Array();
   var arrValue = new Array();
+  var cart_arr = new Array();
+  //cookie.jsの設定、魔法の言葉
+  $.cookie.json = true;
 
 
   //--------リストをhtml出力するためのメソッド----------------------------------------------------------
@@ -20,22 +22,23 @@ var makeListFn = $(function()
   }
 
 
-  //--------リストをhtml出力するためのメソッド----------------------------------------------------------
+  //--------クッキーの更新を取得してカートの数字を書き換えるメソッド----------------------------------------------------------
   var cookieUpdate = function(){
-    var cart_arr = new Array();
-    $.cookie.json = true;
     cart_arr = $.cookie('cart');
     //カートの数字を書き換える
     $('.label').html(cart_arr.length);
+  }
 
+
+  //--------クッキーの更新を取得してカートの数字を書き換えるメソッド----------------------------------------------------------
+  var initButton = function(){
+    cart_arr = $.cookie('cart');
     var counter = 0;
     while (counter<cart_arr.length) {
-      console.log(cart_arr[counter]);
       $("#button" + cart_arr[counter]).html("削除");
       counter++;
     }
   }
-
 
 
   //--------配列の要素の数だけループし、html出力につなげるメソッド----------------------------------------------------------
@@ -74,6 +77,7 @@ var makeListFn = $(function()
   //デフォルト（全表示）のhtmlを出力する
   listControl("all");
   changeHtml("#jsList");
+  initButton();
 
   //selectの値を変更したときにメソッド発動
   $('[name=category]').change(function() {
