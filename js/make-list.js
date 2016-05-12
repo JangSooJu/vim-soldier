@@ -20,6 +20,24 @@ var makeListFn = $(function()
   }
 
 
+  //--------リストをhtml出力するためのメソッド----------------------------------------------------------
+  var cookieUpdate = function(){
+    var cart_arr = new Array();
+    $.cookie.json = true;
+    cart_arr = $.cookie('cart');
+    //カートの数字を書き換える
+    $('.label').html(cart_arr.length);
+
+    var counter = 0;
+    while (counter<cart_arr.length) {
+      console.log(cart_arr[counter]);
+      $("#button" + cart_arr[counter]).html("削除");
+      counter++;
+    }
+  }
+
+
+
   //--------配列の要素の数だけループし、html出力につなげるメソッド----------------------------------------------------------
   var listControl = function(target){
     for(var i=0 ; i < array.length ; i++){
@@ -41,15 +59,21 @@ var makeListFn = $(function()
   var changeList = function(target){
     arrHtml = [];
     listControl($(target).val());
-    $("#jsList").html(arrHtml);
+    changeHtml("#jsList");
   }
 
+
+  //--------htmlを出力するメソッド-----------------------------------------------------------
+  var changeHtml = function(target){
+    $(target).html(arrHtml).hide().fadeIn(800);
+    cookieUpdate();
+  }
 
   //--------パブリックメソッド-----------------------------------------------------------
 
   //デフォルト（全表示）のhtmlを出力する
   listControl("all");
-  $("#jsList").html(arrHtml);
+  changeHtml("#jsList");
 
   //selectの値を変更したときにメソッド発動
   $('[name=category]').change(function() {

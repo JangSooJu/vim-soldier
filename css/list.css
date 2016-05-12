@@ -34,10 +34,6 @@
   color: #ddd;
   font-weight: bold;
 }
-.navMenu i{
-  font-size: 36px;
-  color: #fff;
-}
 
 /*検索機能*/
 #search input[type="text"]{
@@ -87,6 +83,10 @@
 .textList li:not(:first-child){
   margin-left: 12px;
 }
+.textList i{
+  margin-top: 4px;
+  margin-left: 12px;
+}
 
 /*カート部のCSS設定*/
 .cartWrapper{
@@ -108,6 +108,10 @@
   font-size: 14px;
   font-weight: bold;
 }
+.cartWrapper i{
+  font-size: 36px;
+  color: #fff;
+}
 
 /*JSによって動的に生成されるリスト*/
 .list li{
@@ -121,4 +125,16 @@
 }
 .list button{
   display: block;
+}
+
+/*カートが満杯になるまで、隠しておくボックス*/
+#overlay{
+  display: none;
+  width: 100%;
+  height:100%;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  background: rgba(0,0,0,0.7);
 }

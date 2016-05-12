@@ -6,18 +6,7 @@ var cartCookieFn = $(function()
 
   //--------addボタンとdelボタンを切り替える処理---------------------------------------------------------
   var changeButton = function(target,text){
-    //配列の中身を出力するためのベストプラクティス
-    var counter = 0;
-    //isArrayはes5なのでie8で動かない。
-    if(Array.isArray(target)){
-      while (counter<target.length) {
-        $("#button"+target[counter]).html(text);
-        counter++;
-      }
-    }else {
-      $("#"+target).html(text);
-    }
-
+    $("#"+target).html(text);
   }
 
 
@@ -55,17 +44,10 @@ var cartCookieFn = $(function()
     }else if(target.html()=="追加"){
       cookieEdit("add",cart_arr,idCookie);
       changeButton(idTarget,"削除");
+      if(cart_arr.length === 4){
+        $("#overlay").fadeIn(500);
+      }
     }
-  }
-
-
-  //--------クッキーを読み込む---------------------------------------------------------
-  var cart_arr = $.cookie('cart');
-  if( !cart_arr ){
-    cart_arr = Array();
-  }else{
-    //addボタンとdelボタンを書き換える処理
-    changeButton(cart_arr,"削除");
   }
 
 
@@ -75,10 +57,23 @@ var cartCookieFn = $(function()
   }
 
 
+  //--------クッキーを読み込む---------------------------------------------------------
+  var cart_arr = $.cookie('cart');
+  if( !cart_arr ){
+    cart_arr = Array();
+  }else{
+    //addボタンとdelボタンを書き換える処理
+    //changeButton(cart_arr,"削除");
+  }
+
+
   //--------パブリックメソッド---------------------------------------------------------
 
-  $('.list button').on("click", function(){
+  $(document).on("click" , '.list button' , function(){
     cookieControl($(this));
+  });
+  $('#close').click(function(){
+    $("#overlay").fadeOut();
   });
 
   cartNumChange();
