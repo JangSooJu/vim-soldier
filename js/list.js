@@ -99,14 +99,14 @@ $(function()
         'sample3',
         'sample4'
     ];
-
+    */
     $('#input_form_id_here').autocomplete({
-        source: data,
+        source: ["fakjg"."fagaaae"."gadgfaa"],
         autoFocus: true,
         delay: 500,
         minLength: 2
     });
-    */
+    
 //--------最初にallを表示------------------------------------------------------------
     //----------------------------------- 
     // 初期化作業
