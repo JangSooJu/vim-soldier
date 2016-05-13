@@ -37,21 +37,21 @@ class Item
 		// public $item_name;
 		// public static $count =0;
 		// function getList($res){
-			foreach ( $res as $key => $value){
+//			foreach ( $res as $key => $value){
 				// $obj = new getAllItemList;
 			//	$obj->item_id = $key;
 			//	$obj->item_name = $value;
 			//	$objlist[] = $obj;
 			//$id = $key;
 			//$name = $value;
-			echo "Value: ";
-			var_dump($value);
-			echo "<br />\n";
-			}
+//			echo "Value: ";
+//			var_dump($value);
+//			echo "<br />\n";
+//			}
 			// return $objlist;
 		// }
-		echo "<br><br>idを出力<br><br>";
-        var_dump($id);
+//		echo "<br><br>idを出力<br><br>";
+ //       var_dump($id);
         return ( $res !== false && count( $res ) !== 0 ) ? $res : false;
 	}
 	
