@@ -1,14 +1,16 @@
 var cartCookieFn = $(function()
 {
+  //cookie.jsというライブラリを使用するための初期設定
+  $.cookie.json = true;
+
+
   //--------オブジェクト宣言--------------------------------------------------------
   var cartFlag
     , idTarget
     , idCookie;
   //クッキーを読み込む
   var cart_arr = $.cookie('cart');
-
-  //cookie.jsというライブラリを使用し、そのための初期設定
-  $.cookie.json = true;
+  if(!cart_arr) cart_arr=[];
 
 
   //--------addボタンとdelボタンを切り替える処理---------------------------------------------------------

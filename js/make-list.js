@@ -25,6 +25,7 @@ var makeListFn = $(function()
   //--------クッキーの更新を取得してカートの数字を書き換えるメソッド----------------------------------------------------------
   var cookieUpdate = function(){
     cart_arr = $.cookie('cart');
+    if(!cart_arr) cart_arr=[];
     //カートの数字を書き換える
     $('.label').html(cart_arr.length);
   }
@@ -33,6 +34,7 @@ var makeListFn = $(function()
   //--------クッキーの更新を取得してカートの数字を書き換えるメソッド----------------------------------------------------------
   var initButton = function(){
     cart_arr = $.cookie('cart');
+    if(!cart_arr) cart_arr=[];
     var counter = 0;
     while (counter<cart_arr.length) {
       $("#button" + cart_arr[counter]).html("削除");
