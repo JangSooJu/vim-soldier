@@ -16,8 +16,6 @@ $(function()
     
     //var cart = window.sessionStorage.getItem(['cart']);
     //cartを便利にする
-    
-    
 
     $.cookie.json = true;
     var cart_arr = $.cookie('cart');
@@ -42,7 +40,6 @@ $(function()
     $("input#searchwd").autocomplete({
         //e.preventDefault();
         source: ajax_search()
-    
     
     });
      
@@ -99,14 +96,71 @@ $(function()
         'sample3',
         'sample4'
     ];
-    */
+
     $('#input_form_id_here').autocomplete({
-        source: ["fakjg"."fagaaae"."gadgfaa"],
+        source: data,
         autoFocus: true,
         delay: 500,
         minLength: 2
     });
-    
+    */
+
+////ajaxによるページ遷移///////////////////////////////////////////////////////////////////////
+    //ページを書き換える箇所の設定(しなくてもいい)
+	var $content = $('div#wrapper');
+	//ボタンをクリックした時の処理
+	$(document).on('click', 'a#test', function(e) {
+        //以前の処理の停止
+		e.preventDefault();
+		//リンク先を保存
+		var link = $(this).attr("href");
+		//リンク先が同なら遷移しない
+		/*if(link == lastpage){
+			return false;
+		}else{*/
+			$content.fadeOut(600, function() {
+				pageChange(link);
+			});
+			//今のリンク先を保存
+		/*	lastpage = link;
+		*/});/*
+		
+	});*/
+	//初期設定
+	//getPage("1.html");
+	//var lastpage = "1.html";
+
+	//ページを取得してくる
+    function pageChange(link){
+    	$.ajax({
+            type: 'GET',
+            url: link,
+            dataType: 'html',
+            success: function(data){
+                $content.html(data).fadeIn(600);
+            },
+            error:function(){
+                alert('問題がありました。');
+            }
+    	});
+    };
+
+///////lazy-load/////////////////////////////////////////////////////////////////////////////
+//↓のライブラリ使用
+//<script src="jquery.lazyload.min.js"></script>
+    //lazy-loadの起動
+    $("img.lazy").lazyload(
+    {
+        threshold: 10,  //何pxまで近づいたら表示させるか
+        //event: ckick/mouseover //イベント条件の付与も可能
+        effect: "fadeIn", //じわ～っとでてくる
+        effect_speed: 3000 //表示完了までの時間(㍉秒)
+        //failure_limit: int //表示判定の数、同時に表示処理をさせたい時など
+    });
+//imgタグにlazyクラスを使う(他のにするとダメだった)  
+//<img data-original="yakitori.jpg" class="lazy" />
+
+//////////////////////////////////////////////////////////////////////////////////
 //--------最初にallを表示------------------------------------------------------------
     //----------------------------------- 
     // 初期化作業
@@ -404,15 +458,15 @@ $(function()
 
     function listMakeAdd(arrctg, arr, name )
     {
-        arrctg.push('<p><a href="detail.php?name=' + name + '"><img id="list"  src="./img/' + 
-        arr + '" width="200" height="200" /></a></p> <p><button type="button" id="' + 
+        arrctg.push('<p><a href="detail.php?name=' + name + '"><img id="list"  data-original="./img/' + 
+        arr + '" width="200" height="200" class="lazy" /></a></p> <p><button type="button" id="' + 
         name + '" class="add">追加</button></p> ');
     };
 
     function listMakeDel(arrctg, arr, name )
     {
-        arrctg.push('<p><a href="detail.php?name=' + name + '"><img id="list"  src="./img/' + 
-        arr + '" width="200" height="200"></a></p> <p><button id="' + 
+        arrctg.push('<p><a href="detail.php?name=' + name + '"><img id="list"  data-original="./img/' + 
+        arr + '" width="200" height="200" class="lazy"></a></p> <p><button id="' + 
         name + '" class="del" type="button" >削除</button></p> ');
     };
 

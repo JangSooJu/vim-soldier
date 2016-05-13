@@ -3,7 +3,6 @@
     color: #c0c0c0;
 }
 
-
 span#search{
     width: 90px;
     border: solid 1px red;
@@ -31,127 +30,7 @@ img#edamame
     display: none;
 }
 
-/*ソートや検索のナビゲーションへのスタイル*/
-.navMenu{
-  width: 960px;
-  padding: 0;
-  margin: 0 auto;
-  list-style-type: none;
-  background-color: #3d3734;
-  height: 78px;
-  display: block;
-}
-.navMenu>li{
-  height: 78px;
-  display: block;
-  float: left;
-  margin: 0;
-}
-.navMenu>li:first-child{
-  padding: 12px;
-  padding-left: 0;
-  width: 27%;
-}
-.navMenu>li:nth-child(2){
-  width: 8%;
-}
-.navMenu>li:nth-child(3){
-  width: 50%;
-}
-.navMenu>li:last-child{
-  width: 6%;
-  float: right;
-  padding: 12px;
-}
-.navMenu p a{
-  color: #ddd;
-  font-weight: bold;
-}
-.navMenu i{
-  font-size: 36px;
-  color: #fff;
-}
-
-/*検索機能*/
-#search input[type="text"]{
-  padding: 9px;
-  width: 200px;
-  margin-top: 12px;
-  border-radius: 0 2px 2px 0;
-  border-left: 0px;
-  border: 1px solid #ccc;
-  font-family: FontAwesome;
-}
-#search input[type="button"]{
-  font-size: 14px;
-  padding: 4px;
-  width: 100px;
-  margin-top: 12px;
-  border-radius: 2px;
-  border: 1px solid #ccc;
-  cursor: pointer;
-}
-
-/*リストソート*/
-.selecter select{
-  padding: 4px;
-  font-size: 14px;
-  margin-top: 12px;
-  width: 100%;
-  border-radius: 2px 0 0 2px;
-  border: 1px solid #ccc;
-  background: #eee;
-  cursor: pointer;
-}
-
-/*人気キーワードによるテキストトリガー*/
-.textList li{
-  font-size: 12px;
-  display: block;
-  float: left;
-  margin-top: 6px;
-  margin-left: 6px;
-  color: #fff;
-}
-.textList li a{
-  color: #ddd;
-  text-decoration: underline;
-}
-.textList li:not(:first-child){
-  margin-left: 12px;
-}
-
-/*カート部のCSS設定*/
-.cartWrapper{
-  position: relative;
-}
-.label{
-  opacity: 0.8;
-  position: absolute;
-  top: 0px;
-  left: 8px;
-  background-color: gold;
-  color: black;
-  padding: 4px;
-  padding-left: 8px;
-  width: 24px;
-  height: 24px;
-  box-sizing: border-box;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-/*JSによって動的に生成されるリスト*/
-.list li{
-  float: left;
-  margin-left: 50px;
-  margin-bottom: 20px;
-}
-.list img{
-  width: 250px;
-  height: 250px;
-}
-.list button{
-  display: block;
+p.price
+{
+    float:left;
 }
