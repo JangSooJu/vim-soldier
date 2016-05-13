@@ -9,9 +9,8 @@ login3.php
 pdo3.php
 
 [商品の編集・追加を行うページ]
-admin_edit.php
-admin_add.php
-
+menuEdit.php
+menuAdd.php
 
 
 ◎20160510現在
@@ -21,3 +20,10 @@ admin_add.php
 userName(TEXT NOT NULL)
 userPass(TEXT NOT NULL)
 ・一旦はadmin_edit.phpとadmin_add.phpページのフォームで送信した内容にPDOを使ってDBに追加、更新することが目標。
+
+◎20160511現在
+・menuAdd.phpではinsCartDataの中身を変更することによってinsertすることができるようになりました。
+
+◎20160512現在
+・menuAdd.php/menuEdit.phpでフォームから商品情報を新規追加、内容編集ができるようになりました。
+・menuAdd.phpが少しうまく動いていません＞＜

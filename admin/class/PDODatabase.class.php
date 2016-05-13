@@ -5,9 +5,10 @@
  * 主に DB処理
  *
  */
-class PDODatabase{
+require_once "./class/BaseModel.php";
+class PDODatabase extends BaseModel{
 
-        private  $dbh     = NULL;
+ 
         private  $db_host = "";
         private  $db_user = "";
         private  $db_pass = "";
@@ -19,47 +20,47 @@ class PDODatabase{
         private  $offset  = '';
         private  $groupby = '';
 
-        public function __construct( $db_host, $db_user, $db_pass, $db_name, $db_type )
-        {
-            $this->dbh     = $this->connectDB( $db_host, $db_user, $db_pass, $db_name, $db_type );
-            $this->db_host = $db_host;
-            $this->db_user = $db_user;
-            $this->db_pass = $db_pass;
-            $this->db_name = $db_name;
+        // public function __construct( $db_host, $db_user, $db_pass, $db_name, $db_type )
+        // {
+             // //$this->dbh     = $this->db_connect( $db_host, $db_user, $db_pass, $db_name, $db_type );
+            // // $this->db_host = $db_host;
+            // // $this->db_user = $db_user;
+            // // $this->db_pass = $db_pass;
+            // // $this->db_name = $db_name;
 
-            //SQL関連
-            $this->order   = '';
-            $this->limit   = '';
-            $this->offset  = '';
-            $this->groupby = '';
-        }
+            // //SQL関連
+            // $this->order   = '';
+            // $this->limit   = '';
+            // $this->offset  = '';
+            // $this->groupby = '';
+        // }
 
-        private function connectDB( $db_host, $db_user, $db_pass, $db_name, $db_type)
-        {
+//        private function connectDB( $db_host, $db_user, $db_pass, $db_name, $db_type)
+//        {
+//
+//        	try{
+//                switch( $db_type )
+//                {
+//               case 'mysql':
+//                    $dsn = 'mysql:host='.$db_host.';dbname='.$db_name;
+//            		$dbh = new PDO($dsn,$db_user,$db_pass);
+//                    $dbh->query('SET NAMES utf8');
+//                    break;
 
-        	try{
-                switch( $db_type )
-                {
-                case 'mysql':
-                    $dsn = 'mysql:host='.$db_host.';dbname='.$db_name;
-            		$dbh = new PDO($dsn,$db_user,$db_pass);
-                    $dbh->query('SET NAMES utf8');
-                    break;
-
-                case 'pgsql':
-                    $dsn = 'pgsql:dbname='.$db_name.' host=' . $db_host .' port=5432';
-            		$dbh = new PDO($dsn,$db_user,$db_pass);
-                    break;
-            	}
-        	}
-        	catch(PDOException $e)
-        	{
-                var_dump($e->getMessage());
-                exit;
-        	}
+//                case 'pgsql':
+//                    $dsn = 'pgsql:dbname='.$db_name.' host=' . $db_host .' port=5432';
+//            		$dbh = new PDO($dsn,$db_user,$db_pass);
+//                    break;
+//            	}
+//       	}
+//        	catch(PDOException $e)
+//        	{
+//                var_dump($e->getMessage());
+//                exit;
+//        	}
             	
-            return $dbh;
-        }
+//           return $dbh;
+//       }
 
         public function setQuery( $query='', $arrVal = array() )
         {
@@ -72,7 +73,11 @@ class PDODatabase{
         public function select( $table, $column ='',$where = '', $arrVal = array())
         {
             $sql = $this->getSql( 'select', $table, $where, $column);
-
+//			var_dump($table);
+//			echo "<br>";
+//			echo "<br>";
+//			var_dump($sql);
+//			echo "<br>";
             $stmt = $this->dbh->prepare($sql);
             $stmt->execute($arrVal);
             
@@ -155,18 +160,20 @@ class PDODatabase{
 
         public function insert($table, $insData=array() )
         {
-           
+//         var_dump($insData);
             list( $preSt, $insDataVal, $columns) = $this->getPreparedStatement( 'insert', $insData, $table );
-            
-            $sql = " INSERT INTO " . $table . " (" 
-                 .      $columns 
-                 . ") VALUES (" 
-                 .      $preSt 
-                 . ") " ;
-            
+//             var_dump($insData);
+             $sql = " INSERT INTO " . $table . " (" 
+                  .      $columns 
+                  . ") VALUES (" 
+                  .      $preSt 
+                  . ") " ;
+          //var_dump($insDataVal);
             $stmt = $this->dbh->prepare( $sql );
+		//	var_dump($sql);
+		//	var_dump($insDataVal);
             $res  = $stmt->execute($insDataVal);
-            
+			var_dump($res);
             return $res;
         }
 
@@ -181,7 +188,7 @@ class PDODatabase{
                  .      $preSt
                  . " WHERE "
                  .      $where ;
-            
+            //var_dump($sql);
             $updateData = array_merge($insDataVal,$arrWhereVal);
             $stmt       = $this->dbh->prepare( $sql );
             $res        = $stmt->execute($updateData);
@@ -194,17 +201,17 @@ class PDODatabase{
            
             if( !empty($insData) )
             {
-                
+
                 $insDataKey = array_keys($insData);
                 $insDataVal = array_values($insData);
                 $preCnt     = count( $insDataKey );
-                
                 switch( $mode )
                 {
                 case 'insert':
 
                     $columns  = implode(",",$insDataKey);
                     $arrPreSt = array_fill( 0, $preCnt,'?');
+					//var_dump($arrPreSt);
                     $preSt    = implode(",",$arrPreSt);
                         
                     return array($preSt, $insDataVal, $columns);

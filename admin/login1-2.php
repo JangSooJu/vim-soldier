@@ -40,11 +40,11 @@ if(strlen($name) == 0 || strlen($pass)==0){//strlenは文字列のlength
 try{
 	//データベースに接続する
 //	BaseModel::db_connect();
-$db = new BaseModel();
+$connect_db = new BaseModel();
 	//SQL文を発行して、ログイン・パスワードが適切かどうかを確認
 	$sql = "SELECT userName FROM member  WHERE userName = '{$name}' AND userPass = '{$pass}'";
 
-	$state = $db->pdo->query($sql);
+	$state = $connect_db->pdo->query($sql);
 
 	if($state->rowCount() > 0){
 		echo "ログインに成功しました<br>";
@@ -61,5 +61,4 @@ $db = new BaseModel();
 }
 ?>
 <a href="login2.php">ログイン状態を確認する</a><br><br>
-<input type="button" onclick="location.href='admin_edit.php'" value="商品の編集"><br>
-<input type="button" onclick="location.href='admin_add.php'" value="商品の追加">
+<input type="button" onclick="location.href='menuEdit.php'" value="商品の編集">
