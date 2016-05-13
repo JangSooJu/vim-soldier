@@ -31,6 +31,14 @@ class control extends Database {
 	    $data = $this->select($query);
 	    return $data;
     }
+
+	public function detailOpen($get){
+		$query = 'SELECT img, name, price, detail, category, id, kana FROM akino where id ="'. $get. '"';
+	    $data = $this->select($query);
+	    return $data;	
+	}
+
+
     
     public function addSelect($arr){
 		foreach($arr as $val){	

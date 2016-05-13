@@ -17,6 +17,8 @@ $cart->checkSession();
 
 require_once("ifGETname.php");
 
+print_r($data);
+
 $db->close();
 
 /////HMJからとんできたレコメンドをソート/////////////
